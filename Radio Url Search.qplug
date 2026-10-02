@@ -1,8 +1,9 @@
+BuildVersion = "3.4.1.0"
 PluginInfo = {
 	-- Use a tilde (~) to seperate the name into a folder
-    Name = "Radio Url Search",
+    Name = "Radio Url Search v" .. BuildVersion, -- preferred format is "manufacturer~plugin name version"
 	-- Use semantic versioning
-    Version = "3.4.1",
+    Version = BuildVersion,
 	-- Use a GUID for the Id (Note: Avoid changing the Id for a plugin once it is set)
     Id = "ec2efe7f-9127-4081-8b07-90ee9e526dda",
 	-- The square brackets allow for a multi-line string
@@ -87,7 +88,7 @@ end
 
 ------------------------- Plugin Block Name and Color -------------------------
 function GetPrettyName(props)
-    return PluginInfo["Name"] .. " v" .. PluginInfo["Version"]
+    return PluginInfo["Name"]
 end
 
 function GetColor(props)
