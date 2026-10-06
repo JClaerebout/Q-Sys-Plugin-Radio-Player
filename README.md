@@ -1,8 +1,8 @@
-# Q-SYS Plugin - Radio URL Search
+# Q-SYS Plugin - Radio Player
 
 ## Overview
 
-The **Radio URL Search Q-SYS Plugin** searches online radio stations and plays the selected stream through its embedded Q-SYS Media Stream Receiver.
+The **Radio Player Q-SYS Plugin** searches online radio stations and plays the selected stream through its embedded Q-SYS Media Stream Receiver.
 
 The plugin uses the public Radio Browser API to retrieve countries and station results. It is designed as a simple operator tool for finding internet radio streams by country and station name directly inside Q-SYS.
 
@@ -10,9 +10,7 @@ The plugin uses the public Radio Browser API to retrieve countries and station r
 
 ## Compatibility
 
-**Plugin V3.x requires Q-SYS Designer V10.0 or later.**
-
-For **Q-SYS Designer V9.13**, use [plugin V2.3.0](Previous_releases/Q-sys-Plugin-Radio-Url-Search-2.3.0/README.md), which retains the external URL Receiver integration.
+Radio Player uses the embedded Q-SYS Media Stream Receiver. Its unnecessary `mode` property is left unset for compatibility with Q-SYS Designer 9.x and 10.x.
 
 ---
 
@@ -43,8 +41,8 @@ For **Q-SYS Designer V9.13**, use [plugin V2.3.0](Previous_releases/Q-sys-Plugin
 
 | Property | Value |
 | --- | --- |
-| Name | Radio Url Search |
-| Version | 3.4.1 |
+| Name | Radio Player |
+| Version | 3.4.2.0 |
 | Author | Jens Claerebout |
 | Protocol | HTTPS / Radio Browser API |
 | Embedded Q-SYS Component | Media Stream Receiver |
@@ -229,7 +227,7 @@ For existing UCIs, replace `NowPlayingFavicon` with `StationLogo` and use a butt
 
 ## Installation
 
-1. Add the Radio URL Search plugin to your design
+1. Double-click `Radio Player.qplug`; QSysPluginHelper will prompt you to install the plugin. Then add Radio Player to your design.
 2. Connect its Channel 1 and Channel 2 audio outputs
 3. Deploy to the Core
 4. Select a network interface and country
@@ -261,6 +259,12 @@ For existing UCIs, replace `NowPlayingFavicon` with `StationLogo` and use a butt
 
 ## Changelog
 
+### 3.4.2.0 - 2026-10-06
+
+- Commented out the unnecessary embedded receiver property `["mode"] = "Stereo"` that caused problems in Designer 9.x and 10.1.
+- Renamed the plugin and release file to Radio Player and `Radio Player.qplug`.
+- Renamed the repository to Q-Sys-Plugin-Radio-Player; existing GitHub repository links redirect to the new name.
+
 ### 3.4.1 - 2026-09-23
 
 - Added ICY metadata retrieval for the active HTTP/HTTPS stream, with song title display and `StreamTitle`, `StreamUrl`, and `MetadataStatus` output pins.
@@ -278,7 +282,7 @@ For existing UCIs, replace `NowPlayingFavicon` with `StationLogo` and use a butt
 - Split result tiles into SVG artwork in the left quarter and native, centered station text in the right three quarters. Either area selects the station.
 - Added conservative logo-padding trimming and consistent artwork sizing with rounded white backgrounds, including the fallback icon. Artwork is inset instead of clipped.
 - Existing UCI result tiles must include both `SelectBtn` and `ResultName`; native text now supports Designer/UCI text styling.
-- Archived V3.3.0 and provided the matching V2.3.0 update for external receivers.
+- Archived V3.3.0.
 
 ### 3.3.0 - 2026-09-18
 
@@ -300,11 +304,9 @@ For existing UCIs, replace `NowPlayingFavicon` with `StationLogo` and use a butt
 - Added Save, Recall, and Delete buttons for station URLs, names, and favicons.
 - Stored presets in a persistent text control and retained hidden slots when the preset count is reduced.
 - Prevented delayed startup station lookups from replacing a newly selected or recalled station's details.
-- Still requires Q-SYS Designer V10.0 or later. For V9.13 or earlier, use plugin V2.1.0.
 
 ### 3.0.0 - 2026-09-02
 
-- Requires Q-SYS Designer V10.0 or later. For Q-SYS Designer V9.13 or earlier, use [plugin V2.1.0](https://github.com/JClaerebout/Q-sys-Plugin-Radio-Url-Search/releases/tag/V2.1.0).
 - Embedded the Q-SYS Media Stream Receiver in the plugin.
 - Added receiver status, network interface selection, and stereo audio output pins.
 - Added the `Enable Favicon Pages` property. Favicons do not always load reliably in UCI, so they are disabled by default.
