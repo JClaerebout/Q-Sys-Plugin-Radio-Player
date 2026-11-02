@@ -1,4 +1,4 @@
-BuildVersion = "3.4.2.0"
+BuildVersion = "3.4.3.0"
 PluginInfo = {
 	-- Use a tilde (~) to seperate the name into a folder
     Name = "Radio Player v" .. BuildVersion, -- preferred format is "manufacturer~plugin name version"
@@ -1411,13 +1411,23 @@ function funcParceCountryCodes(tbl, code, data, err, headers)
         tbl.Url, code, err or "None"
     ))
 
-    local countries = rapidjson.decode(data)
+    -- Failed requests (including offline/DNS failures) may have no body.
+    -- Keep the existing country selection until a valid response arrives.
+    if code ~= 200 or type(data) ~= "string" or data == "" then
+        return
+    end
+
+    local ok, countries = pcall(rapidjson.decode, data)
+    if not ok or type(countries) ~= "table" then
+        print("Ignoring invalid country list response")
+        return
+    end
 
     local choices = {}
     countryCodeByName = {}
 
     for _, country in ipairs(countries) do
-        if country.name and country.iso_3166_1 then
+        if type(country) == "table" and country.name and country.iso_3166_1 then
             table.insert(choices, country.name)
             countryCodeByName[country.name] = country.iso_3166_1
         end

@@ -42,7 +42,7 @@ Radio Player uses the embedded Q-SYS Media Stream Receiver. Its unnecessary `mod
 | Property | Value |
 | --- | --- |
 | Name | Radio Player |
-| Version | 3.4.2.0 |
+| Version | 3.4.3.0 |
 | Author | Jens Claerebout |
 | Protocol | HTTPS / Radio Browser API |
 | Embedded Q-SYS Component | Media Stream Receiver |
@@ -258,6 +258,11 @@ For existing UCIs, replace `NowPlayingFavicon` with `StationLogo` and use a butt
 ---
 
 ## Changelog
+
+### 3.4.3.0 - 2026-11-02
+
+- Prevented a nil-value error when loading countries without an internet connection or after a failed API request.
+- Safely ignored empty or invalid country-list responses while preserving the existing country selection.
 
 ### 3.4.2.0 - 2026-10-06
 
